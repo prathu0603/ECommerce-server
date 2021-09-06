@@ -186,6 +186,24 @@ router.route("/delete_from_cart").delete(async (request, response) => {
   }
 });
 
+// Empty cart
+router.route("/update_cart").patch(async (request, response) => {
+  const { id } = request.body;
+  try {
+    let user = await User.findById(id);
+    console.log(user);
+    if (user) {
+      user.cart = [];
+      user = await user.save();
+      return response.status(200).send(user);
+    } else {
+      return response.status(404).send({ message: "No User Found" });
+    }
+  } catch (error) {
+    response.status(500).send({ message: "Server Error" });
+  }
+});
+
 // Secured Routes
 router.route("/home").get(Auth, (request, response) => {
   response.status(200).send(request.rootUser);
