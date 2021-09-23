@@ -13,12 +13,12 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  cart: [
-    {
-      productId: String,
-      quantity: Number,
-    },
-  ],
+  confirm: {
+    type: Boolean,
+    default: false,
+  },
+  resetToken: String,
+  expireTime: Date,
   cart: [
     {
       productId: String,
