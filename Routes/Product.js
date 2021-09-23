@@ -110,7 +110,7 @@ router.route("/verify").get(async (request, response) => {
     if (token) {
       const { id } = jwt.verify(token, process.env.SECRET_KEY);
       await User.updateOne({ _id: id }, { confirm: true });
-      return response.redirect("https://ecommerce-site-v1.netlify.app/signin");
+      return response.redirect("https://ecommerce-site-v2.netlify.app/signin");
     } else {
       return response.status(401).json({ message: "Invalid Token" });
     }
@@ -188,7 +188,7 @@ router.route("/reset").post(async (request, response) => {
       subject: `To Reset Password`,
       html: `
                   <p>You Requested For Password Reset</p>
-                  <h5>Click on <a href="https://ecommerce-site-v1.netlify.app/password_reset/${token}">Link</a> , to RESET Password.</h5>
+                  <h5>Click on <a href="https://ecommerce-site-v2.netlify.app/password_reset/${token}">Link</a> , to RESET Password.</h5>
                 `,
     });
     response.status(200).json({ message: "Email Send." });
